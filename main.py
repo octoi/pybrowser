@@ -4,10 +4,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtWebEngineWidgets import *
 
 
-class MyWebBrowser(QMainWindow):
-
-    def __init__(self, *args, **kwargs):
-        super(MyWebBrowser, self).__init__(*args, **kwargs)
+class MyWebBrowser():
+    def __init__(self):
 
         self.window = QWidget()
         self.window.setWindowTitle("Rick Astley Web Browser")
@@ -34,6 +32,10 @@ class MyWebBrowser(QMainWindow):
 
         self.browser = QWebEngineView()
 
+        self.go_btn.clicked.connect(lambda: self.navigate(self.url_bar.toPlainText()))
+        self.back_btn.clicked.connect(self.browser.back)
+        self.forward_btn.clicked.connect(self.browser.forward)
+
         self.layout.addLayout(self.horizontal)
         self.layout.addWidget(self.browser)
 
@@ -41,6 +43,13 @@ class MyWebBrowser(QMainWindow):
 
         self.window.setLayout(self.layout)
         self.window.show()
+
+    def navigate(self, url):
+        if not url.startswith("http"):
+            url = "http://" + url
+            self.url_bar.setText(url)
+
+        self.browser.setUrl(QUrl(url))
 
 
 app = QApplication([])
