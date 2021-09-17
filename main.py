@@ -39,7 +39,7 @@ class MyWebBrowser():
         self.layout.addLayout(self.horizontal)
         self.layout.addWidget(self.browser)
 
-        self.browser.setUrl(QUrl("https://google.com"))
+        self.browser.setUrl(QUrl("https://youtu.be/dQw4w9WgXcQ"))
 
         self.window.setLayout(self.layout)
         self.window.show()
